@@ -21,8 +21,7 @@ def memorize_many(v):
     v.memorize(text=long_data)
 
 if __name__ == "__main__":
-    num_executions = 1
-    print(f"Number of executions averaged over: {num_executions}")
+    num_executions = 1000
 
     # startup_v1_time = timeit.timeit('startup_v1()', 
     #                            setup='from __main__ import startup_v1; from vlite import VLite',
@@ -39,7 +38,6 @@ from __main__ import memorize_one
 v = VLite()
                         ''',
                         number=num_executions) / num_executions
-    print(f"v1 memorize one: {memorize_one_v1_time}")
     
     memorize_one_v2_time = timeit.timeit('memorize_one(v)', 
                         setup='''
@@ -48,7 +46,6 @@ from __main__ import memorize_one
 v = VLite2()
                         ''',
                         number=num_executions) / num_executions
-    print(f"v2 memorize one: {memorize_one_v2_time}")
     
     remember_one_v1_time = timeit.timeit('remember(v, text)', 
                         setup='''
@@ -59,8 +56,6 @@ v.memorize("Hello! My name is Ray. How are you?")
 text = "hello"
                         ''',
                         number=num_executions) / num_executions
-    print(f"v1 remember one: {remember_one_v1_time}")
-
     
     remember_one_v2_time = timeit.timeit('remember(v, text)', 
                         setup='''
@@ -71,7 +66,6 @@ v.memorize("Hello! My name is Ray. How are you?")
 text = "hello"
                         ''',
                         number=num_executions) / num_executions
-    print(f"v2 remember one: {remember_one_v2_time}")
     
     memorize_many_v1_time = timeit.timeit('memorize_many(v)', 
                         setup='''
@@ -80,7 +74,6 @@ from __main__ import memorize_many
 v = VLite()
                         ''',
                         number=num_executions) / num_executions
-    print(f"v1 memorize many: {memorize_many_v1_time}")
     
     memorize_many_v2_time = timeit.timeit('memorize_many(v)', 
                         setup='''
@@ -89,7 +82,6 @@ from __main__ import memorize_many
 v = VLite2()
                         ''',
                         number=num_executions) / num_executions
-    print(f"v2 memorize many: {memorize_many_v2_time}")
 
     remember_many_v1_time = timeit.timeit('remember(v, text)', 
                         setup='''
@@ -100,7 +92,6 @@ memorize_many(v)
 text = "civil law"
                         ''',
                         number=num_executions) / num_executions
-    print(f"v1 remember many: {remember_many_v1_time}")
     
     remember_many_v2_time = timeit.timeit('remember(v, text)', 
                         setup='''
@@ -111,6 +102,15 @@ memorize_many(v)
 text = "civil law"
                         ''',
                         number=num_executions) / num_executions
+
+    print(f"Number of executions averaged over: {num_executions}")
+    print(f"v1 memorize one: {memorize_one_v1_time}")
+    print(f"v2 memorize one: {memorize_one_v2_time}")
+    print(f"v1 remember one: {remember_one_v1_time}")
+    print(f"v2 remember one: {remember_one_v2_time}")
+    print(f"v1 memorize many: {memorize_many_v1_time}")
+    print(f"v2 memorize many: {memorize_many_v2_time}")
+    print(f"v1 remember many: {remember_many_v1_time}")
     print(f"v2 remember many: {remember_many_v2_time}")
 
     files_to_delete = glob.glob('*.npz')
