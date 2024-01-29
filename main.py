@@ -1,13 +1,11 @@
 from vlite2 import VLite2
 from vlite import VLite
 from vlite2.utils import chop_and_chunk
-import chromadb
 from chromadb.utils import embedding_functions
 import os
 import glob
 import timeit
-import regex as re
-from pinecone import Pinecone, PodSpec
+from pinecone import Pinecone
 from sentence_transformers import SentenceTransformer
 from dotenv import load_dotenv
 
@@ -261,7 +259,6 @@ index = pc.Index("quickstart")
 memorize_many_pc(index)
                         ''',
                         number=num_executions) / num_executions
-    
     
     print(f"Number of executions averaged over: {num_executions}")
     print(f"v1 memorize one: {memorize_one_v1_time}")
