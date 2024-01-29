@@ -1,2 +1,6 @@
 vlite2
 vlite
+chromadb
+pinecone-client
+sentence_transformers
+python-dotenv
