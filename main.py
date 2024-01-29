@@ -92,6 +92,7 @@ from __main__ import memorize_one_v
 v = VLite()
                         ''',
                         number=num_executions) / num_executions
+    print("FINISHED MEMORIZE ONE V1")
     
     memorize_one_v2_time = timeit.timeit('memorize_one_v(v)', 
                         setup='''
@@ -100,6 +101,7 @@ from __main__ import memorize_one_v
 v = VLite2()
                         ''',
                         number=num_executions) / num_executions
+    print("FINISHED MEMORIZE ONE V2")
     
     memorize_one_cdb_time = timeit.timeit('memorize_one_cdb(collection)', 
                         setup='''
@@ -110,6 +112,7 @@ client = chromadb.Client()
 collection = client.create_collection(name="collection")
                         ''',
                         number=num_executions) / num_executions
+    print("FINISHED MEMORIZE ONE CDB")
     
     memorize_one_pc_time = timeit.timeit('memorize_one_pc(index)', 
                         setup='''
@@ -125,6 +128,7 @@ pc.create_index(name="quickstart", dimension=384, metric="cosine", spec=PodSpec(
 index = pc.Index("quickstart")
                         ''',
                         number=num_executions) / num_executions
+    print("FINISHED MEMORIZE ONE PC")
     
     remember_one_v1_time = timeit.timeit('remember_v(v, "hello")', 
                         setup='''
@@ -134,6 +138,7 @@ v = VLite()
 v.memorize("Hello! My name is Ray. How are you?")
                         ''',
                         number=num_executions) / num_executions
+    print("FINISHED REMEMBER ONE V1")
     
     remember_one_v2_time = timeit.timeit('remember_v(v, "hello")', 
                         setup='''
@@ -143,6 +148,7 @@ v = VLite2()
 v.memorize("Hello! My name is Ray. How are you?")
                         ''',
                         number=num_executions) / num_executions
+    print("FINISHED REMEMBER ONE V2")
     
     remember_one_cdb_time = timeit.timeit('remember_cdb(collection2, "hello")', 
                         setup='''
@@ -157,6 +163,7 @@ collection2.add(
     )
                         ''',
                         number=num_executions) / num_executions
+    print("FINISHED REMEMBER ONE CDB")
     
     remember_one_pc_time = timeit.timeit('remember_pc(index, "hello")', 
                         setup='''
@@ -174,6 +181,7 @@ index = pc.Index("quickstart")
 memorize_one_pc(index)
                         ''',
                         number=num_executions) / num_executions
+    print("FINISHED REMEMBER ONE PC")
     
     memorize_many_v1_time = timeit.timeit('memorize_many_v(v)', 
                         setup='''
@@ -182,6 +190,7 @@ from __main__ import memorize_many_v
 v = VLite()
                         ''',
                         number=num_executions) / num_executions
+    print("FINISHED MEMORIZE MANY V1")
     
     memorize_many_v2_time = timeit.timeit('memorize_many_v(v)', 
                         setup='''
@@ -190,6 +199,7 @@ from __main__ import memorize_many_v
 v = VLite2()
                         ''',
                         number=num_executions) / num_executions
+    print("FINISHED MEMORIZE MANY V2")
 
     memorize_many_cdb_time = timeit.timeit('memorize_many_cdb(collection3)', 
                         setup='''
@@ -200,6 +210,7 @@ client = chromadb.Client()
 collection3 = client.create_collection(name="collection3")
                         ''',
                         number=num_executions) / num_executions
+    print("FINISHED MEMORIZE MANY CDB")
     
     memorize_many_pc_time = timeit.timeit('memorize_many_pc(index)', 
                         setup='''
@@ -215,6 +226,7 @@ pc.create_index(name="quickstart", dimension=384, metric="cosine", spec=PodSpec(
 index = pc.Index("quickstart")
                         ''',
                         number=num_executions) / num_executions
+    print("FINISHED MEMORIZE MANY PC")
 
     remember_many_v1_time = timeit.timeit('remember_v(v, text)', 
                         setup='''
@@ -225,6 +237,7 @@ memorize_many_v(v)
 text = "civil law"
                         ''',
                         number=num_executions) / num_executions
+    print("FINISHED REMEMBER MANY V1")
     
     remember_many_v2_time = timeit.timeit('remember_v(v, "civil law")', 
                         setup='''
@@ -234,6 +247,7 @@ v = VLite2()
 memorize_many_v(v)
                         ''',
                         number=num_executions) / num_executions
+    print("FINISHED REMEMBER MANY V2")
 
     remember_many_cdb_time = timeit.timeit('remember_cdb(collection4, "civil law")', 
                         setup='''
@@ -245,6 +259,7 @@ collection4 = client.create_collection(name="collection4")
 memorize_many_cdb(collection4)
                         ''',
                         number=num_executions) / num_executions
+    print("FINISHED REMEMBER MANY CDB")
 
     remember_many_pc_time = timeit.timeit('remember_pc(index, "civil law")', 
                         setup='''
@@ -262,8 +277,9 @@ index = pc.Index("quickstart")
 memorize_many_pc(index)
                         ''',
                         number=num_executions) / num_executions
+    print("FINISHED REMEMBER MANY PC")
     
-    print(f"Number of executions averaged over: {num_executions}")
+    print(f"\n\nNumber of executions averaged over: {num_executions}")
     print(f"v1 memorize one: {memorize_one_v1_time}")
     print(f"v2 memorize one: {memorize_one_v2_time}")
     print(f"cdb memorize one: {memorize_one_cdb_time}")
@@ -279,7 +295,7 @@ memorize_many_pc(index)
     print(f"v1 remember many: {remember_many_v1_time}")
     print(f"v2 remember many: {remember_many_v2_time}")
     print(f"cdb remember many: {remember_many_cdb_time}")
-    print(f"pc remember many: {remember_many_pc_time}")
+    print(f"pc remember many: {remember_many_pc_time}\n\n")
 
     files_to_delete = glob.glob('*.npz')
     files_to_delete += glob.glob('*.info')
