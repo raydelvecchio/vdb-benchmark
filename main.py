@@ -125,27 +125,25 @@ index = pc.Index("quickstart")
                         ''',
                         number=num_executions) / num_executions
     
-    remember_one_v1_time = timeit.timeit('remember_v(v, text)', 
+    remember_one_v1_time = timeit.timeit('remember_v(v, "hello")', 
                         setup='''
 from vlite import VLite
 from __main__ import remember_v
 v = VLite()
 v.memorize("Hello! My name is Ray. How are you?")
-text = "hello"
                         ''',
                         number=num_executions) / num_executions
     
-    remember_one_v2_time = timeit.timeit('remember_v(v, text)', 
+    remember_one_v2_time = timeit.timeit('remember_v(v, "hello")', 
                         setup='''
 from vlite2 import VLite2
 from __main__ import remember_v
 v = VLite2()
 v.memorize("Hello! My name is Ray. How are you?")
-text = "hello"
                         ''',
                         number=num_executions) / num_executions
     
-    remember_one_cdb_time = timeit.timeit('remember_cdb(collection2, text)', 
+    remember_one_cdb_time = timeit.timeit('remember_cdb(collection2, "hello")', 
                         setup='''
 import chromadb
 from chromadb.utils import embedding_functions
@@ -156,7 +154,6 @@ collection2.add(
         documents = ["Hello! My name is Ray. How are you?"],
         ids = ["id1"],
     )
-text = "hello"
                         ''',
                         number=num_executions) / num_executions
     
@@ -228,17 +225,16 @@ text = "civil law"
                         ''',
                         number=num_executions) / num_executions
     
-    remember_many_v2_time = timeit.timeit('remember_v(v, text)', 
+    remember_many_v2_time = timeit.timeit('remember_v(v, "civil law")', 
                         setup='''
 from vlite2 import VLite2
 from __main__ import remember_v, memorize_many_v
 v = VLite2()
 memorize_many_v(v)
-text = "civil law"
                         ''',
                         number=num_executions) / num_executions
 
-    remember_many_cdb_time = timeit.timeit('remember_cdb(collection4, text)', 
+    remember_many_cdb_time = timeit.timeit('remember_cdb(collection4, "civil law")', 
                         setup='''
 import chromadb
 from chromadb.utils import embedding_functions
@@ -246,7 +242,6 @@ from __main__ import memorize_many_cdb, remember_cdb
 client = chromadb.Client()
 collection4 = client.create_collection(name="collection4")
 memorize_many_cdb(collection4)
-text = "civil law"
                         ''',
                         number=num_executions) / num_executions
 
@@ -295,4 +290,4 @@ memorize_many_pc(index)
     pc = Pinecone(api_key=os.getenv('PC_API_KEY'))
     for i in pc.list_indexes():
         pc.delete_index(i['name'])
-        
+    
