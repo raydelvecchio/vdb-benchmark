@@ -3,6 +3,7 @@ from vlite import VLite
 from vlite2.utils import chop_and_chunk
 from chromadb.utils import embedding_functions
 import os
+import time
 import glob
 import timeit
 from pinecone import Pinecone
@@ -72,6 +73,8 @@ def memorize_many_pc(index):
         ])
 
 if __name__ == "__main__":
+    start_time = time.time()
+
     num_executions = 100
 
     # startup_v1_time = timeit.timeit('startup_v1()', 
@@ -287,4 +290,7 @@ memorize_many_pc(index)
     pc = Pinecone(api_key=os.getenv('PC_API_KEY'))
     for i in pc.list_indexes():
         pc.delete_index(i['name'])
+
+    end_time = time.time()
+    print(f"Total time to run: {end_time - start_time} seconds")
     
