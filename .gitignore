@@ -1,4 +1,5 @@
 *.npz
 *.info
 *.index
+.env
 /venv
