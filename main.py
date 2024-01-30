@@ -21,7 +21,10 @@ def startup_v1():
 def startup_v2():
     v2 = VLite2()
 
-def memorize_one_v(v):
+def memorize_one_v1(v):
+    v.memorize(short_data)
+
+def memorize_one_v2(v):
     v.ingest(short_data)
 
 def memorize_one_cdb(cdb):
@@ -37,7 +40,10 @@ def memorize_one_pc(index):
         {"id": "id0", "values": short_data_embeddings}
     ])
 
-def remember_v(v, text):
+def remember_v1(v, text):
+    v.remember(text)
+
+def remember_v2(v, text):
     v.retrieve(text)
 
 def remember_cdb(cdb, text):
@@ -53,7 +59,10 @@ def remember_pc(index, text):
         top_k=10
     )
 
-def memorize_many_v(v):
+def memorize_many_v1(v):
+    v.memorize(text=long_data)
+
+def memorize_many_v2(v):
     v.ingest(text=long_data)
 
 def memorize_many_cdb(cdb):
@@ -75,7 +84,7 @@ def memorize_many_pc(index):
 if __name__ == "__main__":
     start_time = time.time()
 
-    num_executions = 100
+    num_executions = 5
 
     # startup_v1_time = timeit.timeit('startup_v1()', 
     #                            setup='from __main__ import startup_v1; from vlite import VLite',
@@ -85,19 +94,19 @@ if __name__ == "__main__":
     #                         setup='from __main__ import startup_v2; from vlite2 import VLite2',
     #                         number=num_executions) / num_executions
     
-    memorize_one_v1_time = timeit.timeit('memorize_one_v(v)', 
+    memorize_one_v1_time = timeit.timeit('memorize_one_v1(v)', 
                         setup='''
 from vlite import VLite
-from __main__ import memorize_one_v
+from __main__ import memorize_one_v1
 v = VLite()
                         ''',
                         number=num_executions) / num_executions
     print("FINISHED MEMORIZE ONE V1")
     
-    memorize_one_v2_time = timeit.timeit('memorize_one_v(v)', 
+    memorize_one_v2_time = timeit.timeit('memorize_one_v2(v)', 
                         setup='''
 from vlite2 import VLite2
-from __main__ import memorize_one_v
+from __main__ import memorize_one_v2
 v = VLite2()
                         ''',
                         number=num_executions) / num_executions
@@ -130,20 +139,20 @@ index = pc.Index("quickstart")
                         number=num_executions) / num_executions
     print("FINISHED MEMORIZE ONE PC")
     
-    remember_one_v1_time = timeit.timeit('remember_v(v, "hello")', 
+    remember_one_v1_time = timeit.timeit('remember_v1(v, "hello")', 
                         setup='''
 from vlite import VLite
-from __main__ import remember_v
+from __main__ import remember_v1
 v = VLite()
-v.ingest("Hello! My name is Ray. How are you?")
+v.memorize("Hello! My name is Ray. How are you?")
                         ''',
                         number=num_executions) / num_executions
     print("FINISHED REMEMBER ONE V1")
     
-    remember_one_v2_time = timeit.timeit('remember_v(v, "hello")', 
+    remember_one_v2_time = timeit.timeit('remember_v2(v, "hello")', 
                         setup='''
 from vlite2 import VLite2
-from __main__ import remember_v
+from __main__ import remember_v2
 v = VLite2()
 v.ingest("Hello! My name is Ray. How are you?")
                         ''',
@@ -183,19 +192,19 @@ memorize_one_pc(index)
                         number=num_executions) / num_executions
     print("FINISHED REMEMBER ONE PC")
     
-    memorize_many_v1_time = timeit.timeit('memorize_many_v(v)', 
+    memorize_many_v1_time = timeit.timeit('memorize_many_v1(v)', 
                         setup='''
 from vlite import VLite
-from __main__ import memorize_many_v
+from __main__ import memorize_many_v1
 v = VLite()
                         ''',
                         number=num_executions) / num_executions
     print("FINISHED MEMORIZE MANY V1")
     
-    memorize_many_v2_time = timeit.timeit('memorize_many_v(v)', 
+    memorize_many_v2_time = timeit.timeit('memorize_many_v2(v)', 
                         setup='''
 from vlite2 import VLite2
-from __main__ import memorize_many_v
+from __main__ import memorize_many_v2
 v = VLite2()
                         ''',
                         number=num_executions) / num_executions
@@ -228,23 +237,23 @@ index = pc.Index("quickstart")
                         number=num_executions) / num_executions
     print("FINISHED MEMORIZE MANY PC")
 
-    remember_many_v1_time = timeit.timeit('remember_v(v, text)', 
+    remember_many_v1_time = timeit.timeit('remember_v1(v, text)', 
                         setup='''
 from vlite import VLite
-from __main__ import remember_v, memorize_many_v
+from __main__ import remember_v1, memorize_many_v1
 v = VLite()
-memorize_many_v(v)
+memorize_many_v1(v)
 text = "civil law"
                         ''',
                         number=num_executions) / num_executions
     print("FINISHED REMEMBER MANY V1")
     
-    remember_many_v2_time = timeit.timeit('remember_v(v, "civil law")', 
+    remember_many_v2_time = timeit.timeit('remember_v2(v, "civil law")', 
                         setup='''
 from vlite2 import VLite2
-from __main__ import remember_v, memorize_many_v
+from __main__ import remember_v2, memorize_many_v2
 v = VLite2()
-memorize_many_v(v)
+memorize_many_v2(v)
                         ''',
                         number=num_executions) / num_executions
     print("FINISHED REMEMBER MANY V2")
