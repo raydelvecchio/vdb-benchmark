@@ -22,7 +22,7 @@ def startup_v2():
     v2 = VLite2()
 
 def memorize_one_v(v):
-    v.memorize(short_data)
+    v.ingest(short_data)
 
 def memorize_one_cdb(cdb):
     cdb.add(
@@ -38,7 +38,7 @@ def memorize_one_pc(index):
     ])
 
 def remember_v(v, text):
-    v.remember(text)
+    v.retrieve(text)
 
 def remember_cdb(cdb, text):
     results = cdb.query(
@@ -54,7 +54,7 @@ def remember_pc(index, text):
     )
 
 def memorize_many_v(v):
-    v.memorize(text=long_data)
+    v.ingest(text=long_data)
 
 def memorize_many_cdb(cdb):
     long_data_chunked = chop_and_chunk(long_data, 512)
@@ -135,7 +135,7 @@ index = pc.Index("quickstart")
 from vlite import VLite
 from __main__ import remember_v
 v = VLite()
-v.memorize("Hello! My name is Ray. How are you?")
+v.ingest("Hello! My name is Ray. How are you?")
                         ''',
                         number=num_executions) / num_executions
     print("FINISHED REMEMBER ONE V1")
@@ -145,7 +145,7 @@ v.memorize("Hello! My name is Ray. How are you?")
 from vlite2 import VLite2
 from __main__ import remember_v
 v = VLite2()
-v.memorize("Hello! My name is Ray. How are you?")
+v.ingest("Hello! My name is Ray. How are you?")
                         ''',
                         number=num_executions) / num_executions
     print("FINISHED REMEMBER ONE V2")
