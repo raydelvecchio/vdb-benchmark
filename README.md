@@ -15,3 +15,4 @@ Speed and other comparisons, primarily used to test and verify the speed of [Vli
 * Pinecone
 * Weaviate
 * Qdrant
+* (Vlite, Vlite2, and Chroma are running locally, Pinecone and Weaviate are running remotely)
