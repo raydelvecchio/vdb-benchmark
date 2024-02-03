@@ -4,6 +4,8 @@ from sentence_transformers import SentenceTransformer
 import os
 import time
 import timeit
+from dotenv import load_dotenv
+import weaviate
 import weaviate_test
 
 def memorize_one_w(client):
@@ -45,7 +47,7 @@ from dotenv import load_dotenv
 from __main__ import memorize_one_w
 load_dotenv(dotenv_path='.env', verbose=True)
 client = weaviate.Client(
-    url = "https://test-i6cwsfxe.weaviate.network",
+    url = os.getenv('W_URL'),
     auth_client_secret=weaviate.auth.AuthApiKey(api_key=os.getenv('W_API_KEY')),
 )
 class_obj = {
@@ -67,7 +69,7 @@ from dotenv import load_dotenv
 from __main__ import memorize_one_w, remember_w
 load_dotenv(dotenv_path='.env', verbose=True)
 client = weaviate.Client(
-    url = "https://test-i6cwsfxe.weaviate.network",
+    url = os.getenv('W_URL'),
     auth_client_secret=weaviate.auth.AuthApiKey(api_key=os.getenv('W_API_KEY')),
 )
 class_obj = {
@@ -90,7 +92,7 @@ from dotenv import load_dotenv
 from __main__ import memorize_many_w
 load_dotenv(dotenv_path='.env', verbose=True)
 client = weaviate.Client(
-    url = "https://test-i6cwsfxe.weaviate.network",
+    url = os.getenv('W_URL'),
     auth_client_secret=weaviate.auth.AuthApiKey(api_key=os.getenv('W_API_KEY')),
 )
 class_obj = {
@@ -111,7 +113,7 @@ from dotenv import load_dotenv
 from __main__ import memorize_many_w, remember_w
 load_dotenv(dotenv_path='.env', verbose=True)
 client = weaviate.Client(
-    url = "https://test-i6cwsfxe.weaviate.network",
+    url = os.getenv('W_URL'),
     auth_client_secret=weaviate.auth.AuthApiKey(api_key=os.getenv('W_API_KEY')),
 )
 class_obj = {
@@ -131,9 +133,10 @@ memorize_many_w(client)
     print(f"w mmemorize many: {memorize_many_w_time}")
     print(f"w remember many: {remember_many_w_time}\n\n")
 
-    client = weaviate_test.Client(
-    url = "https://test-i6cwsfxe.weaviate.network",
-    auth_client_secret=weaviate_test.auth.AuthApiKey(api_key=os.getenv('W_API_KEY')),
+    load_dotenv(dotenv_path='.env', verbose=True)
+    client = weaviate.Client(
+    url = os.getenv('W_URL'),
+    auth_client_secret=weaviate.auth.AuthApiKey(api_key=os.getenv('W_API_KEY')),
     )
     client.schema.delete_class("Question")
     
