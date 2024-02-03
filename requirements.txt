@@ -5,3 +5,4 @@ pinecone-client
 sentence_transformers
 python-dotenv
 weaviate-client
+qdrant-client
