@@ -33,7 +33,6 @@ def memorize_many_q(q):
             points=[PointStruct(id=i, vector=long_data_embeddings[i])]
         )
 
-
 if __name__ == "__main__":
     start_time = time.time()
     
@@ -109,9 +108,9 @@ memorize_many_q(qdrant)
         worksheet = workbook.add_worksheet()
         workbook.close()
         first_df = pd.DataFrame({'': ["Memorize One", "Remember One", "Memorize Many", "Remember Many"]})
-        first = 1;
+        first = 1
     else:
-        first = 0;
+        first = 0
     writer = pd.ExcelWriter('benchmark.xlsx', engine='openpyxl', mode = 'a', if_sheet_exists='overlay')
     workbook = load_workbook("benchmark.xlsx")
     writer.workbook = workbook

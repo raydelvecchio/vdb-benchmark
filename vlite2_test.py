@@ -77,9 +77,9 @@ memorize_many_v2(v)
         worksheet = workbook.add_worksheet()
         workbook.close()
         first_df = pd.DataFrame({'': ["Memorize One", "Remember One", "Memorize Many", "Remember Many"]})
-        first = 1;
+        first = 1
     else:
-        first = 0;
+        first = 0
     writer = pd.ExcelWriter('benchmark.xlsx', engine='openpyxl', mode = 'a', if_sheet_exists='overlay')
     workbook = load_workbook("benchmark.xlsx")
     writer.workbook = workbook
