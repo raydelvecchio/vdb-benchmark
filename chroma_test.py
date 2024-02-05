@@ -3,6 +3,10 @@ from chromadb.utils import embedding_functions
 from vlite2.utils import chop_and_chunk
 import time
 import timeit
+import pandas as pd
+from openpyxl import load_workbook
+import xlsxwriter
+import os
 
 default_ef = embedding_functions.DefaultEmbeddingFunction()
 
@@ -87,3 +91,22 @@ memorize_many_cdb(collection4)
 
     end_time = time.time()
     print(f"Total time to run: {end_time - start_time} seconds")
+
+    if not os.path.exists('benchmark.xlsx'):
+        workbook = xlsxwriter.Workbook('benchmark.xlsx')
+        worksheet = workbook.add_worksheet()
+        workbook.close()
+        first_df = pd.DataFrame({'': ["Memorize One", "Remember One", "Memorize Many", "Remember Many"]})
+        first = 1;
+    else:
+        first = 0;
+    writer = pd.ExcelWriter('benchmark.xlsx', engine='openpyxl', mode = 'a', if_sheet_exists='overlay')
+    workbook = load_workbook("benchmark.xlsx")
+    writer.workbook = workbook
+    df = pd.DataFrame({'Chroma': [memorize_one_cdb_time, remember_one_cdb_time, memorize_many_cdb_time, remember_many_cdb_time]})
+    writer.worksheets = {ws.title: ws for ws in workbook.worksheets}
+    reader = pd.read_excel('benchmark.xlsx')
+    if (first == 1):
+        first_df.to_excel(writer, startcol=reader.shape[1], index = False)
+    df.to_excel(writer, startcol=reader.shape[1] + first, index = False)
+    writer.close()

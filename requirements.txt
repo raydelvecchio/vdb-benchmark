@@ -6,3 +6,6 @@ sentence_transformers
 python-dotenv
 weaviate-client
 qdrant-client
+pandas
+openpyxl
+xlsxwriter

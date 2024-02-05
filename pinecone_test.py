@@ -6,6 +6,10 @@ import time
 import timeit
 import os
 from dotenv import load_dotenv
+from pinecone import Pinecone
+import pandas as pd
+from openpyxl import load_workbook
+import xlsxwriter
 
 def memorize_one_pc(index):
     short_data_embeddings = SentenceTransformer('all-MiniLM-L6-v2').encode(SHORT_DATA).tolist()
@@ -116,3 +120,26 @@ memorize_many_pc(index)
     for i in pc.list_indexes():
         if i['name'] == "quickstart":
             pc.delete_index(i['name'])
+
+    end_time = time.time()
+    print(f"Total time to run: {end_time - start_time} seconds")
+
+    if not os.path.exists('benchmark.xlsx'):
+        workbook = xlsxwriter.Workbook('benchmark.xlsx')
+        worksheet = workbook.add_worksheet()
+        workbook.close()
+        first_df = pd.DataFrame({'': ["Memorize One", "Remember One", "Memorize Many", "Remember Many"]})
+        first = 1;
+    else:
+        first = 0;
+    writer = pd.ExcelWriter('benchmark.xlsx', engine='openpyxl', mode = 'a', if_sheet_exists='overlay')
+    workbook = load_workbook("benchmark.xlsx")
+    writer.workbook = workbook
+    df = pd.DataFrame({'Pinecone': [memorize_one_pc_time, remember_one_pc_time, memorize_many_pc_time, remember_many_pc_time]})
+    writer.worksheets = {ws.title: ws for ws in workbook.worksheets}
+    reader = pd.read_excel('benchmark.xlsx')
+    if (first == 1):
+        first_df.to_excel(writer, startcol=reader.shape[1], index = False)
+    df.to_excel(writer, startcol=reader.shape[1] + first, index = False)
+    writer.close()
+
