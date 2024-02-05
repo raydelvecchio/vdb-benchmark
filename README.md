@@ -8,11 +8,16 @@ Speed and other comparisons, primarily used to test and verify the speed of [Vli
 * Remember One: given a query, time to get the top result when there is only *one* entry in the database
 * Remember Many: given a query, time to get the top k (constant) results when there is an entire corpus of entries in the database
 
+# Run Instructions
+* Can run each file individually, or run all at once with `all_tests.sh`
+* Configuration for all the test runs found in `config.py`
+* All files output the benchmark results to `benchmark.xlsx`
+
 # Comparisons
+NOTE: *Vlite, Vlite2, Chroma, and Qdrant are running locally, Pinecone and Weaviate are running remotely*.
 * VLite
 * VLite2
 * Chroma
 * Pinecone
 * Weaviate
 * Qdrant
-* (Vlite, Vlite2, Chroma, and Qdrant are running locally, Pinecone and Weaviate are running remotely)
