@@ -1,6 +1,6 @@
 # VDB Comparisons
-Speed and other comparisons, primarily used to test and verify the speed of [Vlite2](https://github.com/raydelvecchio/vlite-v2). The goal here is to show the speed
-of Vlite and Vlite2 compared to other vector databases when spinning up a local project. 
+Vector database speed comparisons primarily used to test and verify the speed of [VLite2](https://github.com/raydelvecchio/vlite-v2). This repo shows speed
+comparisons of different vector databases when spinning up a new project.
 
 # Authors
 Bulk of benchmarks written by [Salvatore Del Vecchio](https://github.com/saldelv). Initiated by [me](https://github.com/raydelvecchio). If you'd like to
@@ -26,12 +26,12 @@ one small snippet of text. Long entry is used in ingest/retrieve many and consis
 # Comparisons
 We compare many different vector *databases*. A vector database is a wrapper around a vector index. We are *not* benchmarking vector indexes, as the
 average user starting out does not directly inference the index, but rather a pre-built, ready-to-use database.
-* VLite (local)
-* VLite2 (local)
-* Chroma (local)
-* Pinecone (managed)
-* Weaviate (managed)
-* Qdrant (local)
+* [VLite](https://github.com/sdan/vlite) (local)
+* [VLite2](https://github.com/raydelvecchio/vlite-v2) (local)
+* [Chroma](https://www.trychroma.com/) (local)
+* [Pinecone](https://www.pinecone.io/) (managed)
+* [Weaviate](https://weaviate.io/) (managed)
+* [Qdrant](https://qdrant.tech/) (local)
 
 # Results
 ![ingest One](./results/benchmark_1_Ingest%20One.png)
