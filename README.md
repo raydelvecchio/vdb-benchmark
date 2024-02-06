@@ -20,7 +20,8 @@ Chunking and chopping is normalized across all tests (same function used for all
 * retrieve One: given a query, time to retrieve the top result when there is only *one* entry in the database
 * retrieve Many: given a query, time to retrieve the top results when there is an entire corpus of entries in the database
 
-All entries used to retrieve and ingest found in [constants.py](./constants.py).
+All entries, short and long, used to retrieve and ingest found in [constants.py](./constants.py). Short entry is used in ingest/retrieve one and consists of
+one small snippet of text. Long entry is used in ingest/retrieve many and consists of a corpus of ~2,900 words of legal philosophy text.
 
 # Comparisons
 We compare many different vector *databases*. A vector database is a wrapper around a vector index. We are *not* benchmarking vector indexes, as the
