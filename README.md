@@ -6,18 +6,20 @@ of Vlite and Vlite2 compared to other vector databases when spinning up a local 
 Bulk of benchmarks written by [Salvatore Del Vecchio](https://github.com/saldelv). Initiated by [me](https://github.com/raydelvecchio). If you'd like to
 continue benchmarking or develop new ones, contact me [here](mailto:ray@cerebralvalley.ai).
 
-# Benchmarks
+# Methodology
 All benchmarks are based on the [original vlite tests](https://github.com/sdan/vlite/blob/master/tests/bench.py), and are definitely not scientifically rigorous. **The
-goal here is to simulate what a typical user would do when spinning up a RAG app for local, project, or small production use.** 
+goal here is to simulate what a typical user would do when spinning up a RAG app for local, project, or small production use.** All the below results are from 100 averaged iterations on a 16GB M2 Macbook Pro *not* plugged into power. Pinecone and Weaviate running *remotely* as 
+they would be when starting a new project. Chunking and chopping is normalized across all tests (same function used for all tests). The same embedding model
+(all-MiniLM-L6-v2) used across all tests as well (except chroma, where default embedding function used, but this is actually still all-MiniLM-L6-v2 on the backend per [this](https://docs.trychroma.com/embeddings)). All tests are designed to be the fastest possible methods for ingestion and retrieval in each given database. If they aren't, please
+let me know! 
+
+Tests:
 * Memorize One: time to ingest one constant entry into the database
 * Memorize Many: time to ingest many texts from a corpus into the database
 * Remember One: given a query, time to retrieve the top result when there is only *one* entry in the database
 * Remember Many: given a query, time to retrieve the top results when there is an entire corpus of entries in the database
 
 # Results
-All the below results are from 100 averaged iterations on a 16GB M2 Macbook Pro *not* plugged into power. Pinecone and Weaviate running *remotely* as 
-they would be when starting a new project. Chunking and chopping is normalized across all tests (same function used for all tests). The same embedding model
-(all-MiniLM-L6-v2) used across all tests as well (except chroma, where default embedding function used, but this is actually still all-MiniLM-L6-v2 on the backend per [this](https://docs.trychroma.com/embeddings)).
 ![Memorize One](./results/benchmark_1_Memorize%20One.png)
 ![Memorize Many](./results/benchmark_3_Memorize%20Many.png)
 ![Remember One](./results/benchmark_2_Remember%20One.png)

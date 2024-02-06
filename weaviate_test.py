@@ -35,6 +35,14 @@ def memorize_many_w(questions):
             )
 
 if __name__ == "__main__":
+    load_dotenv(dotenv_path='.env', verbose=True)
+    client = weaviate.connect_to_wcs(
+        cluster_url = os.getenv('W_URL'),
+        auth_credentials=weaviate.auth.AuthApiKey(api_key=os.getenv('W_API_KEY')),
+    )
+    client.collections.delete("Question")
+    client.close()
+
     start_time = time.time()
     
     memorize_one_w_time = timeit.timeit('memorize_one_w(questions)', 
@@ -127,9 +135,9 @@ memorize_many_w(questions)
 
     load_dotenv(dotenv_path='.env', verbose=True)
     client = weaviate.connect_to_wcs(
-    cluster_url = os.getenv('W_URL'),
-    auth_credentials=weaviate.auth.AuthApiKey(api_key=os.getenv('W_API_KEY')),
-        )
+        cluster_url = os.getenv('W_URL'),
+        auth_credentials=weaviate.auth.AuthApiKey(api_key=os.getenv('W_API_KEY')),
+    )
     client.collections.delete("Question")
     client.close()
     
