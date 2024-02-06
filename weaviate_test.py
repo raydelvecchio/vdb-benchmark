@@ -11,7 +11,7 @@ from openpyxl import load_workbook
 import xlsxwriter
 
 def memorize_one_w(questions):
-    short_data_embeddings = SentenceTransformer('all-MiniLM-L6-v2').encode(SHORT_DATA).tolist()
+    short_data_embeddings = SentenceTransformer(model_name).encode(SHORT_DATA).tolist()
     with questions.batch.dynamic() as batch:
         batch.add_object(
             properties={"test": "id0"},
@@ -19,14 +19,14 @@ def memorize_one_w(questions):
         )
 
 def remember_w(questions, text):
-    vector = SentenceTransformer('all-MiniLM-L6-v2').encode(text).tolist()
+    vector = SentenceTransformer(model_name).encode(text).tolist()
     response = questions.query.near_vector(
         near_vector=vector
     )
 
 def memorize_many_w(questions):
     long_data_chunked = chop_and_chunk(LONG_DATA, 512)
-    long_data_embeddings = SentenceTransformer('all-MiniLM-L6-v2').encode(long_data_chunked).tolist()
+    long_data_embeddings = SentenceTransformer(model_name).encode(long_data_chunked).tolist()
     with questions.batch.dynamic() as batch:
         for i in range(len(long_data_chunked)):
             batch.add_object(

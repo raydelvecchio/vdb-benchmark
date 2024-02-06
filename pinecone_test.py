@@ -12,13 +12,13 @@ from openpyxl import load_workbook
 import xlsxwriter
 
 def memorize_one_pc(index):
-    short_data_embeddings = SentenceTransformer('all-MiniLM-L6-v2').encode(SHORT_DATA).tolist()
+    short_data_embeddings = SentenceTransformer(model_name).encode(SHORT_DATA).tolist()
     index.upsert(vectors=[
         {"id": "id0", "values": short_data_embeddings}
     ])
 
 def remember_pc(index, text):
-    vector = SentenceTransformer('all-MiniLM-L6-v2').encode(text).tolist()
+    vector = SentenceTransformer(model_name).encode(text).tolist()
     query_response = index.query(
         namespace="ns0",
         vector=vector,
@@ -27,7 +27,7 @@ def remember_pc(index, text):
 
 def memorize_many_pc(index):
     long_data_chunked = chop_and_chunk(LONG_DATA, 512)
-    long_data_embeddings = SentenceTransformer('all-MiniLM-L6-v2').encode(long_data_chunked).tolist()
+    long_data_embeddings = SentenceTransformer(model_name).encode(long_data_chunked).tolist()
     vectors = [{"id": "id"+str(i), "values": long_data_embeddings[i]} for i in range(len(long_data_chunked))]
     index.upsert(vectors=vectors)
 

@@ -11,21 +11,21 @@ from openpyxl import load_workbook
 import xlsxwriter
 
 def memorize_one_q(q):
-    short_data_embeddings = SentenceTransformer('all-MiniLM-L6-v2').encode(SHORT_DATA).tolist()
+    short_data_embeddings = SentenceTransformer(model_name).encode(SHORT_DATA).tolist()
     q.upsert(
         collection_name="test_collection",
         points=[PointStruct(id=0, vector=short_data_embeddings)]
     )
 
 def remember_q(q, text):
-    vectors = SentenceTransformer('all-MiniLM-L6-v2').encode(text).tolist()
+    vectors = SentenceTransformer(model_name).encode(text).tolist()
     search_result = q.search(
         collection_name="test_collection", query_vector=vectors
     )
 
 def memorize_many_q(q):
     long_data_chunked = chop_and_chunk(LONG_DATA, 512)
-    long_data_embeddings = SentenceTransformer('all-MiniLM-L6-v2').encode(long_data_chunked).tolist()
+    long_data_embeddings = SentenceTransformer(model_name).encode(long_data_chunked).tolist()
     points = [PointStruct(id=i, vector=long_data_embeddings[i]) for i in range(len(long_data_embeddings))]
     q.upsert(
         collection_name="test_collection",
