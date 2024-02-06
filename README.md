@@ -1,5 +1,6 @@
 # VDB Comparisons
-Speed and other comparisons, primarily used to test and verify the speed of [Vlite2](https://github.com/raydelvecchio/vlite-v2). Example of such a benchmark for the [original VLite](https://github.com/sdan/vlite) can be found [here](https://github.com/sdan/vlite/blob/master/tests/bench.py). 
+Speed and other comparisons, primarily used to test and verify the speed of [Vlite2](https://github.com/raydelvecchio/vlite-v2). Example of such a benchmark for the [original VLite](https://github.com/sdan/vlite) can be found [here](https://github.com/sdan/vlite/blob/master/tests/bench.py). The goal here is to show the speed
+of Vlite and Vlite2 compared to other vector databases when spinning up a local project. 
 
 # Benchmarks
 * Memorize One: time to memorize one constant entry into the database
@@ -8,7 +9,9 @@ Speed and other comparisons, primarily used to test and verify the speed of [Vli
 * Remember Many: given a query, time to get the top k (constant) results when there is an entire corpus of entries in the database
 
 # Results
-All the below results are from 100 averaged iterations on a 16GB M2 Macbook Pro *not* plugged into power.
+All the below results are from 100 averaged iterations on a 16GB M2 Macbook Pro *not* plugged into power. Pinecone and Weaviate running *remotely* as 
+they would be when starting a new project. Chunking and chopping is normalized across all tests (same function used for all tests). The same embedding model
+(all-MiniLM-L6-v2) used across all tests as well.
 ![Memorize One](./results/benchmark_1_Memorize%20One.png)
 ![Memorize Many](./results/benchmark_3_Memorize%20Many.png)
 ![Remember One](./results/benchmark_2_Remember%20One.png)
@@ -21,7 +24,6 @@ All the below results are from 100 averaged iterations on a 16GB M2 Macbook Pro 
 * `graphs.py` outputs each benchmark for each db into `/results` as an image
 
 # Comparisons
-NOTE: *Vlite, Vlite2, Chroma, and Qdrant are running locally, Pinecone and Weaviate are running remotely*.
 * VLite
 * VLite2
 * Chroma
