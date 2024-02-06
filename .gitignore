@@ -4,3 +4,4 @@
 .env
 /venv
 *.xlsx
+.DS_Store
