@@ -7,8 +7,8 @@ Bulk of benchmarks written by [Salvatore Del Vecchio](https://github.com/saldelv
 continue benchmarking or develop new ones, contact me [here](mailto:ray@cerebralvalley.ai).
 
 # Benchmarks
-All benchmarks are based on the [original vlite tests](https://github.com/sdan/vlite/blob/master/tests/bench.py), and are definitely not scientifically rigorous. The
-goal here is to simulate what a typical user would do when spinning up a RAG app for local, project, or small production use. 
+All benchmarks are based on the [original vlite tests](https://github.com/sdan/vlite/blob/master/tests/bench.py), and are definitely not scientifically rigorous. **The
+goal here is to simulate what a typical user would do when spinning up a RAG app for local, project, or small production use.** 
 * Memorize One: time to ingest one constant entry into the database
 * Memorize Many: time to ingest many texts from a corpus into the database
 * Remember One: given a query, time to retrieve the top result when there is only *one* entry in the database
@@ -30,6 +30,8 @@ they would be when starting a new project. Chunking and chopping is normalized a
 * `graphs.py` outputs each benchmark for each db into `/results` as an image
 
 # Comparisons
+We compare many different vector *databases*. A vector database is a wrapper around a vector index. We are *not* benchmarking vector indexes, as the
+average user starting out does not directly inference the index, but rather a pre-built, ready-to-use database.
 * VLite
 * VLite2
 * Chroma
