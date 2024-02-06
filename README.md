@@ -25,9 +25,9 @@ Tests:
 ![Remember One](./results/benchmark_2_Remember%20One.png)
 ![Remember Many](./results/benchmark_4_Remember%20Many.png)
 
-# Run Instructions
+# Run Instructions / Files
 * Can run each file individually, or run all at once with `all_tests.sh`
-* Configuration for all the test runs found in `config.py`
+* Configuration for all the test runs found in `constants.py`
 * All files output the benchmark results to `benchmark.xlsx`
 * `graphs.py` outputs each benchmark for each db into `/results` as an image
 
