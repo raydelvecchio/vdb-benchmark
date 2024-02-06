@@ -11,10 +11,18 @@ for i, (idx, row) in enumerate(data.iterrows()):
     categories = data.columns[1:]
     x = np.arange(len(values))
     
-    bars = ax.bar(x, values)
+    colors = plt.cm.viridis(np.linspace(0, 1, len(values)))
     
-    for bar, value in zip(bars, values):
-        ax.text(bar.get_x() + bar.get_width() / 2, bar.get_height() + 0.02,
+    bars = ax.bar(x, values, color=colors)
+    
+    for bar, category, value in zip(bars, categories, values):
+        text_position = bar.get_height() + 0.003
+
+        if category == "VLite2":
+            ax.text(bar.get_x() + bar.get_width() / 2, text_position,
+                f'{value:.4f}', ha='center', va='bottom', fontweight='bold')
+        else:
+            ax.text(bar.get_x() + bar.get_width() / 2, text_position,
                 f'{value:.4f}', ha='center', va='bottom')
     
     ax.set_title(f'Benchmark: {row[0]}')
@@ -24,5 +32,3 @@ for i, (idx, row) in enumerate(data.iterrows()):
     
     plt.tight_layout()
     plt.savefig(f'./results/benchmark_{i+1}_{row[0]}.png')
-
-file_paths = [f'./results/benchmark_{i+1}_{row[0]}.png' for i, row in data.iterrows()]

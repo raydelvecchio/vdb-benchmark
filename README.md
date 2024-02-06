@@ -12,6 +12,7 @@ Speed and other comparisons, primarily used to test and verify the speed of [Vli
 * Can run each file individually, or run all at once with `all_tests.sh`
 * Configuration for all the test runs found in `config.py`
 * All files output the benchmark results to `benchmark.xlsx`
+* `graphs.py` outputs each benchmark for each db into `/results` as an image
 
 # Comparisons
 NOTE: *Vlite, Vlite2, Chroma, and Qdrant are running locally, Pinecone and Weaviate are running remotely*.
