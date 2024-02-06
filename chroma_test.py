@@ -19,7 +19,7 @@ def memorize_one_cdb(cdb):
 
 def remember_cdb(cdb, text):
     results = cdb.query(
-        query_texts=[text],
+        query_embeddings=default_ef(text),
     )
 
 def memorize_many_cdb(cdb):

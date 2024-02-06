@@ -18,9 +18,9 @@ def memorize_one_q(q):
     )
 
 def remember_q(q, text):
-    text_embeddings = SentenceTransformer('all-MiniLM-L6-v2').encode(text).tolist()
+    vectors = SentenceTransformer('all-MiniLM-L6-v2').encode(text).tolist()
     search_result = q.search(
-        collection_name="test_collection", query_vector=text_embeddings
+        collection_name="test_collection", query_vector=vectors
     )
 
 def memorize_many_q(q):

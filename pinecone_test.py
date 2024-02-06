@@ -18,10 +18,10 @@ def memorize_one_pc(index):
     ])
 
 def remember_pc(index, text):
-    text = SentenceTransformer('all-MiniLM-L6-v2').encode(text).tolist()
+    vector = SentenceTransformer('all-MiniLM-L6-v2').encode(text).tolist()
     query_response = index.query(
         namespace="ns0",
-        vector=text,
+        vector=vector,
         top_k=10
     )
 

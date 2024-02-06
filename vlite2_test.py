@@ -16,7 +16,6 @@ def remember_v2(v, text):
 def memorize_many_v2(v):
     v.ingest(text=LONG_DATA)
 
-
 if __name__ == "__main__":
     start_time = time.time()
 
