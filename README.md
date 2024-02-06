@@ -8,6 +8,7 @@ Speed and other comparisons, primarily used to test and verify the speed of [Vli
 * Remember Many: given a query, time to get the top k (constant) results when there is an entire corpus of entries in the database
 
 # Results
+All the below results are from 100 averaged iterations on a 16GB M2 Macbook Pro *not* plugged into power.
 ![Memorize One](./results/benchmark_1_Memorize%20One.png)
 ![Memorize Many](./results/benchmark_3_Memorize%20Many.png)
 ![Remember One](./results/benchmark_2_Remember%20One.png)
