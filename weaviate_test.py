@@ -130,6 +130,7 @@ memorize_many_w(questions)
     cluster_url = os.getenv('W_URL'),
     auth_credentials=weaviate.auth.AuthApiKey(api_key=os.getenv('W_API_KEY')),
         )
+    client.collections.delete("Question")
     client.close()
     
     end_time = time.time()
