@@ -2,6 +2,9 @@
 Speed and other comparisons, primarily used to test and verify the speed of [Vlite2](https://github.com/raydelvecchio/vlite-v2). Example of such a benchmark for the [original VLite](https://github.com/sdan/vlite) can be found [here](https://github.com/sdan/vlite/blob/master/tests/bench.py). The goal here is to show the speed
 of Vlite and Vlite2 compared to other vector databases when spinning up a local project. 
 
+# Authors
+Bulk of benchmarks written by [Salvatore Del Vecchio](https://github.com/saldelv). Initiated by [me](https://github.com/raydelvecchio). 
+
 # Benchmarks
 * Memorize One: time to memorize one constant entry into the database
 * Memorize Many: time to memorize many texts from a corpus into the database

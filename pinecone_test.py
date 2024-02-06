@@ -33,7 +33,6 @@ def memorize_many_pc(index):
             {"id": "id"+str(i), "values": long_data_embeddings[i]}
         ])
 
-
 if __name__ == "__main__":
     start_time = time.time()
 
@@ -142,4 +141,3 @@ memorize_many_pc(index)
         first_df.to_excel(writer, startcol=reader.shape[1], index = False)
     df.to_excel(writer, startcol=reader.shape[1] + first, index = False)
     writer.close()
-
