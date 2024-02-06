@@ -10,7 +10,7 @@ import pandas as pd
 from openpyxl import load_workbook
 import xlsxwriter
 
-def memorize_one_w(questions):
+def ingest_one_w(questions):
     short_data_embeddings = SentenceTransformer(model_name).encode(SHORT_DATA).tolist()
     with questions.batch.dynamic() as batch:
         batch.add_object(
@@ -18,13 +18,13 @@ def memorize_one_w(questions):
             vector=short_data_embeddings
         )
 
-def remember_w(questions, text):
+def retrieve_w(questions, text):
     vector = SentenceTransformer(model_name).encode(text).tolist()
     response = questions.query.near_vector(
         near_vector=vector
     )
 
-def memorize_many_w(questions):
+def ingest_many_w(questions):
     long_data_chunked = chop_and_chunk(LONG_DATA, 512)
     long_data_embeddings = SentenceTransformer(model_name).encode(long_data_chunked).tolist()
     with questions.batch.dynamic() as batch:
@@ -45,13 +45,13 @@ if __name__ == "__main__":
 
     start_time = time.time()
     
-    memorize_one_w_time = timeit.timeit('memorize_one_w(questions)', 
+    ingest_one_w_time = timeit.timeit('ingest_one_w(questions)', 
                         setup='''
 import weaviate
 import weaviate.classes as wvc
 import os
 from dotenv import load_dotenv
-from __main__ import memorize_one_w
+from __main__ import ingest_one_w
 load_dotenv(dotenv_path='.env', verbose=True)
 client = weaviate.connect_to_wcs(
     cluster_url = os.getenv('W_URL'),
@@ -63,15 +63,15 @@ questions = client.collections.create(
 )
                         ''',
                         number=num_executions) / num_executions
-    print("FINISHED MEMORIZE ONE W")
+    print("FINISHED ingest ONE W")
     
-    remember_one_w_time = timeit.timeit('remember_w(questions, "hello")', 
+    retrieve_one_w_time = timeit.timeit('retrieve_w(questions, "hello")', 
                         setup='''
 import weaviate
 import weaviate.classes as wvc
 import os
 from dotenv import load_dotenv
-from __main__ import memorize_one_w, remember_w
+from __main__ import ingest_one_w, retrieve_w
 load_dotenv(dotenv_path='.env', verbose=True)
 client = weaviate.connect_to_wcs(
     cluster_url = os.getenv('W_URL'),
@@ -81,18 +81,18 @@ client.collections.delete("Question")
 questions = client.collections.create(
     name="Question",
 )
-memorize_one_w(questions)
+ingest_one_w(questions)
                         ''',
                         number=num_executions) / num_executions
-    print("FINISHED REMEMBER ONE W")
+    print("FINISHED retrieve ONE W")
 
-    memorize_many_w_time = timeit.timeit('memorize_many_w(questions)', 
+    ingest_many_w_time = timeit.timeit('ingest_many_w(questions)', 
                         setup='''
 import weaviate
 import weaviate.classes as wvc
 import os
 from dotenv import load_dotenv
-from __main__ import memorize_many_w
+from __main__ import ingest_many_w
 load_dotenv(dotenv_path='.env', verbose=True)
 client = weaviate.connect_to_wcs(
     cluster_url = os.getenv('W_URL'),
@@ -104,15 +104,15 @@ questions = client.collections.create(
 )
                         ''',
                         number=num_executions) / num_executions
-    print("FINISHED MEMORIZE MANY W")
+    print("FINISHED ingest MANY W")
 
-    remember_many_w_time = timeit.timeit('remember_w(questions, "civil law")', 
+    retrieve_many_w_time = timeit.timeit('retrieve_w(questions, "civil law")', 
                         setup='''
 import weaviate
 import weaviate.classes as wvc
 import os
 from dotenv import load_dotenv
-from __main__ import memorize_many_w, remember_w
+from __main__ import ingest_many_w, retrieve_w
 load_dotenv(dotenv_path='.env', verbose=True)
 client = weaviate.connect_to_wcs(
     cluster_url = os.getenv('W_URL'),
@@ -122,16 +122,16 @@ client.collections.delete("Question")
 questions = client.collections.create(
     name="Question",
 )
-memorize_many_w(questions)
+ingest_many_w(questions)
                         ''',
                         number=num_executions) / num_executions
-    print("FINISHED REMEMBER MANY W")
+    print("FINISHED retrieve MANY W")
     
     print(f"\n\nNumber of executions averaged over: {num_executions}")
-    print(f"w memorize one: {memorize_one_w_time}")
-    print(f"w remember one: {remember_one_w_time}")
-    print(f"w memorize many: {memorize_many_w_time}")
-    print(f"w remember many: {remember_many_w_time}\n\n")
+    print(f"w ingest one: {ingest_one_w_time}")
+    print(f"w retrieve one: {retrieve_one_w_time}")
+    print(f"w ingest many: {ingest_many_w_time}")
+    print(f"w retrieve many: {retrieve_many_w_time}\n\n")
 
     load_dotenv(dotenv_path='.env', verbose=True)
     client = weaviate.connect_to_wcs(
@@ -148,14 +148,14 @@ memorize_many_w(questions)
         workbook = xlsxwriter.Workbook('benchmark.xlsx')
         worksheet = workbook.add_worksheet()
         workbook.close()
-        first_df = pd.DataFrame({'': ["Memorize One", "Remember One", "Memorize Many", "Remember Many"]})
+        first_df = pd.DataFrame({'': ["ingest One", "retrieve One", "ingest Many", "retrieve Many"]})
         first = 1
     else:
         first = 0
     writer = pd.ExcelWriter('benchmark.xlsx', engine='openpyxl', mode = 'a', if_sheet_exists='overlay')
     workbook = load_workbook("benchmark.xlsx")
     writer.workbook = workbook
-    df = pd.DataFrame({'Weaviate': [memorize_one_w_time, remember_one_w_time, memorize_many_w_time, remember_many_w_time]})
+    df = pd.DataFrame({'Weaviate': [ingest_one_w_time, retrieve_one_w_time, ingest_many_w_time, retrieve_many_w_time]})
     writer.worksheets = {ws.title: ws for ws in workbook.worksheets}
     reader = pd.read_excel('benchmark.xlsx')
     if (first == 1):

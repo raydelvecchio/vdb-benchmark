@@ -7,61 +7,61 @@ import pandas as pd
 from openpyxl import load_workbook
 import xlsxwriter
 
-def memorize_one_v2(v):
+def ingest_one_v2(v):
     v.ingest(SHORT_DATA)
 
-def remember_v2(v, text):
+def retrieve_v2(v, text):
     v.retrieve(text)
 
-def memorize_many_v2(v):
+def ingest_many_v2(v):
     v.ingest(text=LONG_DATA)
 
 if __name__ == "__main__":
     start_time = time.time()
 
-    memorize_one_v2_time = timeit.timeit('memorize_one_v2(v)', 
+    ingest_one_v2_time = timeit.timeit('ingest_one_v2(v)', 
                         setup='''
 from vlite2 import VLite2
-from __main__ import memorize_one_v2
+from __main__ import ingest_one_v2
 v = VLite2()
                         ''',
                         number=num_executions) / num_executions
-    print("FINISHED MEMORIZE ONE V2")
+    print("FINISHED ingest ONE V2")
 
-    remember_one_v2_time = timeit.timeit('remember_v2(v, "hello")', 
+    retrieve_one_v2_time = timeit.timeit('retrieve_v2(v, "hello")', 
                         setup='''
 from vlite2 import VLite2
-from __main__ import remember_v2
+from __main__ import retrieve_v2
 v = VLite2()
 v.ingest("Hello! My name is Ray. How are you?")
                         ''',
                         number=num_executions) / num_executions
-    print("FINISHED REMEMBER ONE V2")
+    print("FINISHED retrieve ONE V2")
 
-    memorize_many_v2_time = timeit.timeit('memorize_many_v2(v)', 
+    ingest_many_v2_time = timeit.timeit('ingest_many_v2(v)', 
                         setup='''
 from vlite2 import VLite2
-from __main__ import memorize_many_v2
+from __main__ import ingest_many_v2
 v = VLite2()
                         ''',
                         number=num_executions) / num_executions
-    print("FINISHED MEMORIZE MANY V2")
+    print("FINISHED ingest MANY V2")
 
-    remember_many_v2_time = timeit.timeit('remember_v2(v, "civil law")', 
+    retrieve_many_v2_time = timeit.timeit('retrieve_v2(v, "civil law")', 
                         setup='''
 from vlite2 import VLite2
-from __main__ import remember_v2, memorize_many_v2
+from __main__ import retrieve_v2, ingest_many_v2
 v = VLite2()
-memorize_many_v2(v)
+ingest_many_v2(v)
                         ''',
                         number=num_executions) / num_executions
-    print("FINISHED REMEMBER MANY V2")
+    print("FINISHED retrieve MANY V2")
 
     print(f"\n\nNumber of executions averaged over: {num_executions}")
-    print(f"v2 memorize one: {memorize_one_v2_time}")
-    print(f"v2 remember one: {remember_one_v2_time}")
-    print(f"v2 memorize many: {memorize_many_v2_time}")
-    print(f"v2 remember many: {remember_many_v2_time}")
+    print(f"v2 ingest one: {ingest_one_v2_time}")
+    print(f"v2 retrieve one: {retrieve_one_v2_time}")
+    print(f"v2 ingest many: {ingest_many_v2_time}")
+    print(f"v2 retrieve many: {retrieve_many_v2_time}")
 
     files_to_delete = glob.glob('*.info')
     files_to_delete += glob.glob('*.index')
@@ -75,14 +75,14 @@ memorize_many_v2(v)
         workbook = xlsxwriter.Workbook('benchmark.xlsx')
         worksheet = workbook.add_worksheet()
         workbook.close()
-        first_df = pd.DataFrame({'': ["Memorize One", "Remember One", "Memorize Many", "Remember Many"]})
+        first_df = pd.DataFrame({'': ["ingest One", "retrieve One", "ingest Many", "retrieve Many"]})
         first = 1
     else:
         first = 0
     writer = pd.ExcelWriter('benchmark.xlsx', engine='openpyxl', mode = 'a', if_sheet_exists='overlay')
     workbook = load_workbook("benchmark.xlsx")
     writer.workbook = workbook
-    df = pd.DataFrame({'VLite2': [memorize_one_v2_time, remember_one_v2_time, memorize_many_v2_time, remember_many_v2_time]})
+    df = pd.DataFrame({'VLite2': [ingest_one_v2_time, retrieve_one_v2_time, ingest_many_v2_time, retrieve_many_v2_time]})
     writer.worksheets = {ws.title: ws for ws in workbook.worksheets}
     reader = pd.read_excel('benchmark.xlsx')
     if (first == 1):
