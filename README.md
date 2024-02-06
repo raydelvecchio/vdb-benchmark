@@ -11,7 +11,7 @@ Speed and other comparisons, primarily used to test and verify the speed of [Vli
 ![Memorize One](./results/benchmark_1_Memorize%20One.png)
 ![Memorize Many](./results/benchmark_3_Memorize%20Many.png)
 ![Remember One](./results/benchmark_2_Remember%20One.png)
-![Remember Many](./results/benchmark_1_Memorize%20One.png)
+![Remember Many](./results/benchmark_4_Remember%20Many.png)
 
 # Run Instructions
 * Can run each file individually, or run all at once with `all_tests.sh`
