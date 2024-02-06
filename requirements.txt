@@ -9,3 +9,4 @@ qdrant-client
 pandas
 openpyxl
 xlsxwriter
+matplotlib
