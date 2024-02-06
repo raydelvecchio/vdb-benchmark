@@ -45,7 +45,7 @@ if __name__ == "__main__":
 from pinecone import Pinecone, PodSpec
 import os
 from dotenv import load_dotenv
-from constants import *
+from constants import dimension
 from __main__ import memorize_one_pc
 load_dotenv(dotenv_path='.env', verbose=True)
 pc = Pinecone(api_key=os.getenv('PC_API_KEY'))
@@ -63,7 +63,7 @@ index = pc.Index("quickstart")
 from pinecone import Pinecone, PodSpec
 from sentence_transformers import SentenceTransformer
 import os
-from constants import *
+from constants import dimension
 from dotenv import load_dotenv
 from __main__ import memorize_one_pc, remember_pc
 load_dotenv(dotenv_path='.env', verbose=True)
@@ -82,7 +82,7 @@ memorize_one_pc(index)
                         setup='''
 from pinecone import Pinecone, PodSpec
 import os
-from constants import *
+from constants import dimension
 from dotenv import load_dotenv
 from __main__ import memorize_many_pc
 load_dotenv(dotenv_path='.env', verbose=True)
@@ -101,7 +101,7 @@ index = pc.Index("quickstart")
 from pinecone import Pinecone, PodSpec
 from sentence_transformers import SentenceTransformer
 import os
-from constants import *
+from constants import dimension
 from dotenv import load_dotenv
 from __main__ import memorize_many_pc, remember_pc
 load_dotenv(dotenv_path='.env', verbose=True)
