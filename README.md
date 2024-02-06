@@ -6,10 +6,10 @@ of Vlite and Vlite2 compared to other vector databases when spinning up a local 
 Bulk of benchmarks written by [Salvatore Del Vecchio](https://github.com/saldelv). Initiated by [me](https://github.com/raydelvecchio). 
 
 # Benchmarks
-* Memorize One: time to memorize one constant entry into the database
-* Memorize Many: time to memorize many texts from a corpus into the database
-* Remember One: given a query, time to get the top result when there is only *one* entry in the database
-* Remember Many: given a query, time to get the top k (constant) results when there is an entire corpus of entries in the database
+* Memorize One: time to ingest one constant entry into the database
+* Memorize Many: time to ingest many texts from a corpus into the database
+* Remember One: given a query, time to retrieve the top result when there is only *one* entry in the database
+* Remember Many: given a query, time to retrieve the top results when there is an entire corpus of entries in the database
 
 # Results
 All the below results are from 100 averaged iterations on a 16GB M2 Macbook Pro *not* plugged into power. Pinecone and Weaviate running *remotely* as 
