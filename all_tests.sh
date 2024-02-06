@@ -8,3 +8,4 @@ python3 chroma_test.py
 python3 pinecone_test.py
 python3 weaviate_test.py
 python3 qdrant_test.py
+python3 graphs.py
