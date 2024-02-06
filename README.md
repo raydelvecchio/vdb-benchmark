@@ -31,10 +31,10 @@ average user starting out does not directly inference the index, but rather a pr
 * Qdrant
 
 # Results
-![ingest One](./results/benchmark_1_ingest%20One.png)
-![ingest Many](./results/benchmark_3_ingest%20Many.png)
-![retrieve One](./results/benchmark_2_retrieve%20One.png)
-![retrieve Many](./results/benchmark_4_retrieve%20Many.png)
+![ingest One](./results/benchmark_1_Ingest%20One.png)
+![ingest Many](./results/benchmark_3_Ingest%20Many.png)
+![retrieve One](./results/benchmark_2_Retrieve%20One.png)
+![retrieve Many](./results/benchmark_4_Retrieve%20Many.png)
 
 # Run Instructions / Files
 * Can run each file individually, or run all at once with `all_tests.sh`
