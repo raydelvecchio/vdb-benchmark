@@ -45,13 +45,14 @@ if __name__ == "__main__":
 from pinecone import Pinecone, PodSpec
 import os
 from dotenv import load_dotenv
+from constants import *
 from __main__ import memorize_one_pc
 load_dotenv(dotenv_path='.env', verbose=True)
 pc = Pinecone(api_key=os.getenv('PC_API_KEY'))
 for i in pc.list_indexes():
     if i['name'] == "quickstart":
         pc.delete_index(i['name'])
-pc.create_index(name="quickstart", dimension=384, metric="cosine", spec=PodSpec(environment='gcp-starter'))
+pc.create_index(name="quickstart", dimension=dimension, metric="cosine", spec=PodSpec(environment='gcp-starter'))
 index = pc.Index("quickstart")
                         ''',
                         number=num_executions) / num_executions
@@ -62,6 +63,7 @@ index = pc.Index("quickstart")
 from pinecone import Pinecone, PodSpec
 from sentence_transformers import SentenceTransformer
 import os
+from constants import *
 from dotenv import load_dotenv
 from __main__ import memorize_one_pc, remember_pc
 load_dotenv(dotenv_path='.env', verbose=True)
@@ -69,7 +71,7 @@ pc = Pinecone(api_key=os.getenv('PC_API_KEY'))
 for i in pc.list_indexes():
     if i['name'] == "quickstart":
         pc.delete_index(i['name'])
-pc.create_index(name="quickstart", dimension=384, metric="cosine", spec=PodSpec(environment='gcp-starter'))
+pc.create_index(name="quickstart", dimension=dimension, metric="cosine", spec=PodSpec(environment='gcp-starter'))
 index = pc.Index("quickstart")
 memorize_one_pc(index)
                         ''',
@@ -80,6 +82,7 @@ memorize_one_pc(index)
                         setup='''
 from pinecone import Pinecone, PodSpec
 import os
+from constants import *
 from dotenv import load_dotenv
 from __main__ import memorize_many_pc
 load_dotenv(dotenv_path='.env', verbose=True)
@@ -87,7 +90,7 @@ pc = Pinecone(api_key=os.getenv('PC_API_KEY'))
 for i in pc.list_indexes():
     if i['name'] == "quickstart":
         pc.delete_index(i['name'])
-pc.create_index(name="quickstart", dimension=384, metric="cosine", spec=PodSpec(environment='gcp-starter'))
+pc.create_index(name="quickstart", dimension=dimension, metric="cosine", spec=PodSpec(environment='gcp-starter'))
 index = pc.Index("quickstart")
                         ''',
                         number=num_executions) / num_executions
@@ -98,6 +101,7 @@ index = pc.Index("quickstart")
 from pinecone import Pinecone, PodSpec
 from sentence_transformers import SentenceTransformer
 import os
+from constants import *
 from dotenv import load_dotenv
 from __main__ import memorize_many_pc, remember_pc
 load_dotenv(dotenv_path='.env', verbose=True)
@@ -105,7 +109,7 @@ pc = Pinecone(api_key=os.getenv('PC_API_KEY'))
 for i in pc.list_indexes():
     if i['name'] == "quickstart":
         pc.delete_index(i['name'])
-pc.create_index(name="quickstart", dimension=384, metric="cosine", spec=PodSpec(environment='gcp-starter'))
+pc.create_index(name="quickstart", dimension=dimension, metric="cosine", spec=PodSpec(environment='gcp-starter'))
 index = pc.Index("quickstart")
 memorize_many_pc(index)
                         ''',

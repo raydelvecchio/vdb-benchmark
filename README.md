@@ -17,7 +17,7 @@ goal here is to simulate what a typical user would do when spinning up a RAG app
 # Results
 All the below results are from 100 averaged iterations on a 16GB M2 Macbook Pro *not* plugged into power. Pinecone and Weaviate running *remotely* as 
 they would be when starting a new project. Chunking and chopping is normalized across all tests (same function used for all tests). The same embedding model
-(all-MiniLM-L6-v2) used across all tests as well (except chroma, where default embedding function used).
+(all-MiniLM-L6-v2) used across all tests as well (except chroma, where default embedding function used, but this is actually still all-MiniLM-L6-v2 on the backend per [this](https://docs.trychroma.com/embeddings)).
 ![Memorize One](./results/benchmark_1_Memorize%20One.png)
 ![Memorize Many](./results/benchmark_3_Memorize%20Many.png)
 ![Remember One](./results/benchmark_2_Remember%20One.png)

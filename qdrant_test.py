@@ -38,12 +38,13 @@ if __name__ == "__main__":
     memorize_one_q_time = timeit.timeit('memorize_one_q(qdrant)', 
                         setup='''
 from qdrant_client import QdrantClient
+from constants import *
 from qdrant_client.http.models import Distance, VectorParams
 from __main__ import memorize_one_q
 qdrant = QdrantClient(":memory:")
 qdrant.create_collection(
 collection_name="test_collection",
-vectors_config=VectorParams(size=384, distance=Distance.COSINE)
+vectors_config=VectorParams(size=dimension, distance=Distance.COSINE)
 )
                         ''',
                         number=num_executions) / num_executions
@@ -52,12 +53,13 @@ vectors_config=VectorParams(size=384, distance=Distance.COSINE)
     remember_one_q_time = timeit.timeit('remember_q(qdrant, "hello")', 
                         setup='''
 from qdrant_client import QdrantClient
+from constants import *
 from qdrant_client.http.models import Distance, VectorParams
 from __main__ import memorize_one_q, remember_q
 qdrant = QdrantClient(":memory:")
 qdrant.create_collection(
 collection_name="test_collection",
-vectors_config=VectorParams(size=384, distance=Distance.COSINE)
+vectors_config=VectorParams(size=dimension, distance=Distance.COSINE)
 )
 memorize_one_q(qdrant)
                         ''',
@@ -67,12 +69,13 @@ memorize_one_q(qdrant)
     memorize_many_q_time = timeit.timeit('memorize_many_q(qdrant)', 
                         setup='''
 from qdrant_client import QdrantClient
+from constants import *
 from qdrant_client.http.models import Distance, VectorParams
 from __main__ import memorize_many_q
 qdrant = QdrantClient(":memory:")
 qdrant.create_collection(
 collection_name="test_collection",
-vectors_config=VectorParams(size=384, distance=Distance.COSINE)
+vectors_config=VectorParams(size=dimension, distance=Distance.COSINE)
 )
                         ''',
                         number=num_executions) / num_executions
@@ -81,12 +84,13 @@ vectors_config=VectorParams(size=384, distance=Distance.COSINE)
     remember_many_q_time = timeit.timeit('remember_q(qdrant, "civil law")', 
                         setup='''
 from qdrant_client import QdrantClient
+from constants import *
 from qdrant_client.http.models import Distance, VectorParams
 from __main__ import memorize_many_q, remember_q
 qdrant = QdrantClient(":memory:")
 qdrant.create_collection(
 collection_name="test_collection",
-vectors_config=VectorParams(size=384, distance=Distance.COSINE)
+vectors_config=VectorParams(size=dimension, distance=Distance.COSINE)
 )
 memorize_many_q(qdrant)
                         ''',

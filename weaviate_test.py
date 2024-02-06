@@ -30,7 +30,7 @@ def memorize_many_w(questions):
     with questions.batch.dynamic() as batch:
         for i in range(len(long_data_chunked)):
             batch.add_object(
-                properties={"test": "id{i}"},
+                properties={"test": f"id{i}"},
                 vector=long_data_embeddings[i]
             )
 
@@ -154,3 +154,4 @@ memorize_many_w(questions)
         first_df.to_excel(writer, startcol=reader.shape[1], index = False)
     df.to_excel(writer, startcol=reader.shape[1] + first, index = False)
     writer.close()
+    
