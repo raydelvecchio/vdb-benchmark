@@ -15,10 +15,10 @@ Chunking and chopping is normalized across all tests (same function used for all
 (all-MiniLM-L6-v2) used across all tests as well (except chroma, where default embedding function used, but this is actually still all-MiniLM-L6-v2 on the backend per [this](https://docs.trychroma.com/embeddings)). All tests are designed to be the fastest possible methods for ingestion and retrieval in each given database per the latest documentation for [Weaviate](https://weaviate.io/developers/weaviate/manage-data/import), [Pinecone](https://docs.pinecone.io/docs/upsert-data), [Chroma](https://docs.trychroma.com/usage-guide), and [Qdrant](https://github.com/qdrant/qdrant-client). If these are not the fastest methods a typical user would use to ingest or retrieve from the database, please let me know!
 
 **Tests Conducted:**
-* ingest One: time to ingest one constant entry into the database
-* ingest Many: time to ingest many texts from a corpus into the database
-* retrieve One: given a query, time to retrieve the top result when there is only *one* entry in the database
-* retrieve Many: given a query, time to retrieve the top results when there is an entire corpus of entries in the database
+* *ingest One*: time to ingest one constant entry into the database
+* *ingest Many*: time to ingest many texts from a corpus into the database
+* *retrieve One*: given a query, time to retrieve the top result when there is only *one* entry in the database
+* *retrieve Many*: given a query, time to retrieve the top results when there is an entire corpus of entries in the database
 
 All entries, short and long, used to retrieve and ingest found in [constants.py](./constants.py). Short entry is used in ingest/retrieve one and consists of
 one small snippet of text. Long entry is used in ingest/retrieve many and consists of a corpus of ~2,900 words of legal philosophy text.
