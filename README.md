@@ -8,12 +8,11 @@ Speed and other comparisons, primarily used to test and verify the speed of [Vli
 * Remember Many: given a query, time to get the top k (constant) results when there is an entire corpus of entries in the database
 
 # Results
-![Benchmark 1](./results/benchmark_1_Startup Time.png)
-![Benchmark 2](./results/benchmark_2_Memorize One.png)
-![Benchmark 3](./results/benchmark_3_Memorize Many.png)
-![Benchmark 4](./results/benchmark_4_Remember One.png)
-![Benchmark 5](./results/benchmark_5_Remember Many.png)
-
+![Benchmark 1](./results/benchmark_1_Startup_Time.png)
+![Benchmark 2](./results/benchmark_2_Memorize_One.png)
+![Benchmark 3](./results/benchmark_3_Memorize_Many.png)
+![Benchmark 4](./results/benchmark_4_Remember_One.png)
+![Benchmark 5](./results/benchmark_5_Remember_Many.png)
 
 # Run Instructions
 * Can run each file individually, or run all at once with `all_tests.sh`
