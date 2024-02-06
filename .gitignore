@@ -3,3 +3,4 @@
 *.index
 .env
 /venv
+*.xlsx
