@@ -4,8 +4,7 @@ import glob
 import os
 import timeit
 from vlite2.utils import chop_and_chunk
-from qdrant_client import QdrantClient
-from qdrant_client.http.models import Distance, VectorParams, PointStruct
+from qdrant_client.http.models import PointStruct
 from sentence_transformers import SentenceTransformer
 import pandas as pd
 from openpyxl import load_workbook
@@ -27,11 +26,11 @@ def remember_q(q, text):
 def memorize_many_q(q):
     long_data_chunked = chop_and_chunk(LONG_DATA, 512)
     long_data_embeddings = SentenceTransformer('all-MiniLM-L6-v2').encode(long_data_chunked).tolist()
-    for i in range(len(long_data_embeddings)):
-        q.upsert(
-            collection_name="test_collection",
-            points=[PointStruct(id=i, vector=long_data_embeddings[i])]
-        )
+    points = [PointStruct(id=i, vector=long_data_embeddings[i]) for i in range(len(long_data_embeddings))]
+    q.upsert(
+        collection_name="test_collection",
+        points=points
+    )
 
 if __name__ == "__main__":
     start_time = time.time()

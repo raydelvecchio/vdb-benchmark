@@ -30,7 +30,6 @@ def memorize_many_cdb(cdb):
         ids = ["id"+str(i) for i in range(len(long_data_chunked))],
     )
 
-
 if __name__ == "__main__":
     start_time = time.time()
 

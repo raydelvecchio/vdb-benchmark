@@ -28,12 +28,16 @@ def remember_pc(index, text):
 def memorize_many_pc(index):
     long_data_chunked = chop_and_chunk(LONG_DATA, 512)
     long_data_embeddings = SentenceTransformer('all-MiniLM-L6-v2').encode(long_data_chunked).tolist()
-    for i in range(len(long_data_chunked)):
-        index.upsert(vectors=[
-            {"id": "id"+str(i), "values": long_data_embeddings[i]}
-        ])
+    vectors = [{"id": "id"+str(i), "values": long_data_embeddings[i]} for i in range(len(long_data_chunked))]
+    index.upsert(vectors=vectors)
 
 if __name__ == "__main__":
+    load_dotenv(dotenv_path='.env', verbose=True)
+    pc = Pinecone(api_key=os.getenv('PC_API_KEY'))
+    for i in pc.list_indexes():
+        if i['name'] == "quickstart":
+            pc.delete_index(i['name'])
+
     start_time = time.time()
 
     memorize_one_pc_time = timeit.timeit('memorize_one_pc(index)', 
