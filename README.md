@@ -3,7 +3,8 @@ Speed and other comparisons, primarily used to test and verify the speed of [Vli
 of Vlite and Vlite2 compared to other vector databases when spinning up a local project. 
 
 # Authors
-Bulk of benchmarks written by [Salvatore Del Vecchio](https://github.com/saldelv). Initiated by [me](https://github.com/raydelvecchio). 
+Bulk of benchmarks written by [Salvatore Del Vecchio](https://github.com/saldelv). Initiated by [me](https://github.com/raydelvecchio). If you'd like to
+continue benchmarking or develop new ones, contact me [here](mailto:ray@cerebralvalley.ai).
 
 # Benchmarks
 * Memorize One: time to ingest one constant entry into the database
@@ -14,7 +15,7 @@ Bulk of benchmarks written by [Salvatore Del Vecchio](https://github.com/saldelv
 # Results
 All the below results are from 100 averaged iterations on a 16GB M2 Macbook Pro *not* plugged into power. Pinecone and Weaviate running *remotely* as 
 they would be when starting a new project. Chunking and chopping is normalized across all tests (same function used for all tests). The same embedding model
-(all-MiniLM-L6-v2) used across all tests as well.
+(all-MiniLM-L6-v2) used across all tests as well (except chroma, where default embedding function used).
 ![Memorize One](./results/benchmark_1_Memorize%20One.png)
 ![Memorize Many](./results/benchmark_3_Memorize%20Many.png)
 ![Remember One](./results/benchmark_2_Remember%20One.png)
