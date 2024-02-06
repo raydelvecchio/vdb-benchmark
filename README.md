@@ -8,11 +8,13 @@ continue benchmarking or develop new ones, contact me [here](mailto:ray@cerebral
 
 # Methodology
 All benchmarks are based on the [original vlite tests](https://github.com/sdan/vlite/blob/master/tests/bench.py), and are definitely not scientifically rigorous. **The
-goal here is to simulate what a typical user would do when spinning up a RAG app for local, project, or small production use.** All the below results are from 100 averaged iterations on a 16GB M2 Macbook Pro *not* plugged into power. Pinecone and Weaviate running *remotely* as 
-they would be when starting a new project. Chunking and chopping is normalized across all tests (same function used for all tests). The same embedding model
+goal here is to simulate what a typical user would do when spinning up a RAG app for local, project, or small production use.** 
+Thus, for managed servies running remotely (Pinecone and Weaviate), we use the base free version. 
+All the below results are from 100 averaged iterations on a 16GB M2 Macbook Pro plugged into power. 
+Chunking and chopping is normalized across all tests (same function used for all tests). The same embedding model
 (all-MiniLM-L6-v2) used across all tests as well (except chroma, where default embedding function used, but this is actually still all-MiniLM-L6-v2 on the backend per [this](https://docs.trychroma.com/embeddings)). All tests are designed to be the fastest possible methods for ingestion and retrieval in each given database per the latest documentation for [Weaviate](https://weaviate.io/developers/weaviate/manage-data/import), [Pinecone](https://docs.pinecone.io/docs/upsert-data), [Chroma](https://docs.trychroma.com/usage-guide), and [Qdrant](https://github.com/qdrant/qdrant-client). If these are not the fastest methods a typical user would use to ingest or retrieve from the database, please let me know!
 
-Tests:
+**Tests Conducted:**
 * ingest One: time to ingest one constant entry into the database
 * ingest Many: time to ingest many texts from a corpus into the database
 * retrieve One: given a query, time to retrieve the top result when there is only *one* entry in the database
@@ -23,12 +25,12 @@ All entries used to retrieve and ingest found in [constants.py](./constants.py).
 # Comparisons
 We compare many different vector *databases*. A vector database is a wrapper around a vector index. We are *not* benchmarking vector indexes, as the
 average user starting out does not directly inference the index, but rather a pre-built, ready-to-use database.
-* VLite
-* VLite2
-* Chroma
-* Pinecone
-* Weaviate
-* Qdrant
+* VLite (local)
+* VLite2 (local)
+* Chroma (local)
+* Pinecone (managed)
+* Weaviate (managed)
+* Qdrant (local)
 
 # Results
 ![ingest One](./results/benchmark_1_Ingest%20One.png)
