@@ -22,7 +22,7 @@ def retrieve_pc(index, text):
     query_response = index.query(
         namespace="ns0",
         vector=vector,
-        top_k=10
+        top_k=k
     )
 
 def ingest_many_pc(index):

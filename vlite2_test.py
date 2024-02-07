@@ -11,7 +11,7 @@ def ingest_one_v2(v):
     v.ingest(SHORT_DATA)
 
 def retrieve_v2(v, text):
-    v.retrieve(text)
+    v.retrieve(text, top_k=k)
 
 def ingest_many_v2(v):
     v.ingest(text=LONG_DATA)

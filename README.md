@@ -12,7 +12,9 @@ goal here is to simulate what a typical user would do when spinning up a RAG app
 Thus, for managed servies running remotely (Pinecone and Weaviate), we use the base free version. 
 All the below results are from 100 averaged iterations on a 16GB M2 Macbook Pro plugged into power. 
 Chunking and chopping is normalized across all tests (same function used for all tests). The same embedding model
-(all-MiniLM-L6-v2) used across all tests as well (except chroma, where default embedding function used, but this is actually still all-MiniLM-L6-v2 on the backend per [this](https://docs.trychroma.com/embeddings)). All tests are designed to be the fastest possible methods for ingestion and retrieval in each given database per the latest documentation for [Weaviate](https://weaviate.io/developers/weaviate/manage-data/import), [Pinecone](https://docs.pinecone.io/docs/upsert-data), [Chroma](https://docs.trychroma.com/usage-guide), and [Qdrant](https://github.com/qdrant/qdrant-client). If these are not the fastest methods a typical user would use to ingest or retrieve from the database, please let me know!
+(all-MiniLM-L6-v2) used across all tests as well (except chroma, where default embedding function used, but this is actually still all-MiniLM-L6-v2 on the backend per [this](https://docs.trychroma.com/embeddings)). 
+When retrieving, the top k results is kept constant with k=5.
+All tests are designed to be the fastest possible methods for ingestion and retrieval in each given database per the latest documentation for [Weaviate](https://weaviate.io/developers/weaviate/manage-data/import), [Pinecone](https://docs.pinecone.io/docs/upsert-data), [Chroma](https://docs.trychroma.com/usage-guide), and [Qdrant](https://github.com/qdrant/qdrant-client). If these are not the fastest methods a typical user would use to ingest or retrieve from the database, please let me know!
 
 **Tests Conducted:**
 * *ingest One*: time to ingest one constant entry into the database
@@ -38,6 +40,13 @@ average user starting out does not directly inference the index, but rather a pr
 ![ingest Many](./results/benchmark_3_Ingest%20Many.png)
 ![retrieve One](./results/benchmark_2_Retrieve%20One.png)
 ![retrieve Many](./results/benchmark_4_Retrieve%20Many.png)
+
+# Conclusions
+* VLite2 is the fastest database for retrieval time by a large margin (2x over VLite)
+* For ingestion, VLite is the fastest, since they don't index vectors (rather calling `np.vstack` to store vectors)
+* VLite2 is the easiest to use, with two exposed functions for ingestion and retrieval, fastest setup time, and fastest install time
+    * Look at the code base for the complexity to use other databases; many steps to set up and inference the db
+* Pinecone's GCP starter environment crashed frequently during testing of this (giving 500 often)
 
 # Run Instructions / Files
 * Can run each file individually, or run all at once with `all_tests.sh`

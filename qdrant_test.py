@@ -19,7 +19,7 @@ def ingest_one_q(q):
 def retrieve_q(q, text):
     vectors = SentenceTransformer(model_name).encode(text).tolist()
     search_result = q.search(
-        collection_name="test_collection", query_vector=vectors
+        collection_name="test_collection", query_vector=vectors, limit=k
     )
 
 def ingest_many_q(q):

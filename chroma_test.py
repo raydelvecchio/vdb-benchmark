@@ -20,6 +20,7 @@ def ingest_one_cdb(cdb):
 def retrieve_cdb(cdb, text):
     results = cdb.query(
         query_embeddings=default_ef(text),
+        n_results=k
     )
 
 def ingest_many_cdb(cdb):

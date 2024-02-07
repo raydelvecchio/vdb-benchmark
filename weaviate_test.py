@@ -21,7 +21,8 @@ def ingest_one_w(questions):
 def retrieve_w(questions, text):
     vector = SentenceTransformer(model_name).encode(text).tolist()
     response = questions.query.near_vector(
-        near_vector=vector
+        near_vector=vector,
+        limit=k
     )
 
 def ingest_many_w(questions):

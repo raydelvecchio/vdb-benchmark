@@ -1,6 +1,7 @@
 from vlite2 import EmbeddingModel
 
 num_executions: int = 100
+k: int = 5
 dimension: int = EmbeddingModel().dimension
 model_name: str = "all-MiniLM-L6-v2"
 SHORT_DATA: str = "Hello! My name is Ray. How are you?"

@@ -11,7 +11,7 @@ def ingest_one_v1(v):
     v.memorize(SHORT_DATA)
 
 def retrieve_v1(v, text):
-    v.remember(text)
+    v.remember(text, top_k=k)
 
 def ingest_many_v1(v):
     v.memorize(text=LONG_DATA)
