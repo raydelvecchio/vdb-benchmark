@@ -41,13 +41,6 @@ average user starting out does not directly inference the index, but rather a pr
 ![retrieve One](./results/benchmark_2_Retrieve%20One.png)
 ![retrieve Many](./results/benchmark_4_Retrieve%20Many.png)
 
-# Conclusions
-* VLite2 is the fastest database for retrieval time by a large margin (2x over VLite)
-* For ingestion, VLite is the fastest, since they don't index vectors (rather calling `np.vstack` to store vectors)
-* VLite2 is the easiest to use, with two exposed functions for ingestion and retrieval, fastest setup time, and fastest install time
-    * Look at the code base for the complexity to use other databases; many steps to set up and inference the db
-* Pinecone's GCP starter environment crashed frequently during testing of this (giving error code 500 often)
-
 # Run Instructions / Files
 * Can run each file individually, or run all at once with `all_tests.sh`
 * Configuration for all the test runs found in `constants.py`
