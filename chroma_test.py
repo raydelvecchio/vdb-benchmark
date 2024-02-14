@@ -1,6 +1,7 @@
 from constants import *
 from chromadb.utils import embedding_functions
 from vlite2.utils import chop_and_chunk
+from vlite2.model import EmbeddingModel
 import time
 import timeit
 import pandas as pd
@@ -8,26 +9,26 @@ from openpyxl import load_workbook
 import xlsxwriter
 import os
 
-default_ef = embedding_functions.DefaultEmbeddingFunction()
+embedding_model = EmbeddingModel()
 
 def ingest_one_cdb(cdb):
-    cdb.add(
+    cdb.upsert(
         documents = [SHORT_DATA],
-        embeddings = default_ef([SHORT_DATA]),
+        embeddings = embedding_model.embed(texts=SHORT_DATA),
         ids = ["id0"],
     )
 
 def retrieve_cdb(cdb, text):
     results = cdb.query(
-        query_embeddings=default_ef(text),
+        query_embeddings=embedding_model.embed(texts=[text]),
         n_results=k
     )
 
 def ingest_many_cdb(cdb):
     long_data_chunked = chop_and_chunk(LONG_DATA, 512)
-    cdb.add(
+    cdb.upsert(
         documents = long_data_chunked,
-        embeddings = default_ef(long_data_chunked),
+        embeddings = embedding_model.embed(texts=long_data_chunked),
         ids = ["id"+str(i) for i in range(len(long_data_chunked))],
     )
 
